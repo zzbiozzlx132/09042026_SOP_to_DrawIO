@@ -262,6 +262,12 @@ Luôn giao tiếp tự nhiên, xúc tích, và thân thiện.
         setGeneratingState(true);
         showStatus(generateStatus, 'AI Kiến trúc sư đang dựng bản vẽ XML...', '');
 
+        // Mở sẵn tab trắng để trình duyệt không chặn Popup do lệch thời gian (async blocker)
+        const drawioTab = window.open('about:blank', '_blank');
+        if (drawioTab) {
+            drawioTab.document.write('<h2 style="font-family:sans-serif;text-align:center;margin-top:20vh;color:#333;">🚀 Đang phân tích và dựng mã kiến trúc Draw.io.<br>Vui lòng đợi vài giây...</h2>');
+        }
+
         try {
             const ARCHITECT_PROMPT = `
 You are an expert Diagram Architect capable of converting SOPs into draw.io XML flowcharts.
@@ -304,10 +310,17 @@ Rules:
             const base64 = btoa(Array.from(compressed, b => String.fromCharCode(b)).join(""));
             
             const createObj = { type: "xml", compressed: true, data: base64 };
-            window.open("https://app.diagrams.net/?pv=0&grid=0#create=" + encodeURIComponent(JSON.stringify(createObj)), '_blank');
+            const finalUrl = "https://app.diagrams.net/?pv=0&grid=0#create=" + encodeURIComponent(JSON.stringify(createObj));
+            
+            if (drawioTab) {
+                drawioTab.location.href = finalUrl;
+            } else {
+                window.open(finalUrl, '_blank');
+            }
 
         } catch (err) {
             console.error(err);
+            if (drawioTab) drawioTab.close();
             showStatus(generateStatus, `Lỗi Kiến Trúc Sơ Đồ: ${err.message}`, 'error');
         } finally {
             setGeneratingState(false);
