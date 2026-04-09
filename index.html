@@ -18,10 +18,41 @@
             <p>Trợ lý ảo phân tích, chuẩn hóa và tự thiết kế lưu đồ tự động từ ý tưởng của bạn.</p>
         </header>
 
+        <!-- 0. Guide PDF / Instructions (PDCA) -->
+        <section id="guide-section" class="card guide-card">
+            <h2>📜 Hướng dẫn sử dụng (Quy trình PDCA)</h2>
+            <div class="pdca-steps">
+                <div class="step">
+                    <span class="step-icon">P</span>
+                    <div class="step-text">
+                        <strong>Plan (Lập Kế Hoạch):</strong> Dán khóa bảo mật (Gemini API Key) của bạn vào mục Cấu hình để liên kết với hệ thống máy chủ Cố vấn AI.
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-icon">D</span>
+                    <div class="step-text">
+                        <strong>Do (Tạo Khởi):</strong> Hãy dốc toàn bộ luồng ý nghĩ thô vào khu vực Chat. <i>Cố vấn SOP</i> sẽ hỏi han để giúp bạn bóc tách từng điều kiện rẽ nhánh ngoại lệ.
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-icon">C</span>
+                    <div class="step-text">
+                        <strong>Check (Kiểm Tra):</strong> Bấm chốt để đúc kết ra văn bản chuẩn mực ở mục Textarea số (3). Tại đây, bạn dùng mắt kiểm duyệt lại xem câu từ có thừa mứa không trước khi vẽ.
+                    </div>
+                </div>
+                <div class="step">
+                    <span class="step-icon">A</span>
+                    <div class="step-text">
+                        <strong>Act (Tiêu Chuẩn Hành Động):</strong> Nhấn chuyển đổi để ứng dụng bắt đầu dịch ngược mã XML bản vẽ. Một cửa sổ Draw.io sẽ bật ra với Sơ đồ mạch lạc và bạn chỉ việc tinh chỉnh mỹ thuật lưu lại!
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- 1. Settings Section -->
         <section id="settings-section" class="card">
             <div class="card-header">
-                <h2>Cấu hình kết nối Gemini</h2>
+                <h2>1. Cấu hình kết nối AI</h2>
                 <div class="status-indicator" id="status-dot"></div>
             </div>
             <div class="input-group">
@@ -34,9 +65,9 @@
         <!-- 2. Chat Brainstorming Section -->
         <section id="chat-section" class="card disabled-section">
             <div class="card-header">
-                <h2>Trợ lý SOP (Tư duy A-Z)</h2>
+                <h2>2. Trợ lý SOP (Tư duy quy trình A-Z)</h2>
                 <div class="model-group">
-                    <label for="model-select">Model:</label>
+                    <label for="model-select">Lõi AI:</label>
                     <select id="model-select" disabled>
                         <option value="">Chưa kết nối</option>
                     </select>
@@ -48,16 +79,16 @@
                 <div class="chat-message ai-message">
                     <div class="avatar">AI</div>
                     <div class="message-content">
-                        Chào bạn! Tôi là Cố vấn Quy trình SOP. Hãy cho tôi biết sơ qua bạn muốn xây dựng mô hình quy trình nào (ví dụ: Tuyển dụng, Mua hàng, Xử lý khiếu nại...), tôi sẽ phân tích từng bước, bóc tách rẽ nhánh ngoại lệ giúp bạn.
+                        Chào bạn! Tôi là Cố vấn Quy trình SOP. Hãy cho tôi biết sơ qua ý tưởng quy trình của bạn là gì (VD: Tuyển dụng, Giải quyết khiếu nại...). Tôi sẽ bóc tách từ góc nhìn người trong cuộc để giúp bạn làm rõ từng hành động nhé!
                     </div>
                 </div>
             </div>
 
             <div class="chat-input-area">
-                <textarea id="chat-input" placeholder="Ví dụ: Mình muốn quy trình duyệt nghỉ ngơi của công ty..." rows="2" disabled></textarea>
+                <textarea id="chat-input" placeholder="Ví dụ: Mình muốn xử lý cái quy trình duyệt nghỉ ngơi của công ty. Thường nhân viên báo nghỉ xong sếp xem rồi qua HR..." rows="2" disabled></textarea>
                 <div class="chat-actions">
-                    <button class="btn send-btn" id="send-chat-btn" disabled>Gửi</button>
-                    <button class="btn primary outline" id="finalize-btn" disabled>Chốt SOP & Vẽ Sơ Đồ 👇</button>
+                    <button class="btn send-btn" id="send-chat-btn" disabled>Gửi tương tác</button>
+                    <button class="btn primary outline" id="finalize-btn" disabled>Chốt cấu trúc báo cáo 👇</button>
                 </div>
             </div>
         </section>
@@ -65,16 +96,16 @@
         <!-- 3. Generator Output Section -->
         <section id="generator-section" class="card disabled-section">
             <div class="card-header">
-                <h2>Cấu trúc Lưu Đồ (XML Converter)</h2>
+                <h2>3. Cấu trúc Lưu Đồ (XML Converter)</h2>
             </div>
             
             <div class="input-container">
-                <label for="sop-input">Dữ liệu SOP chuẩn mực dùng để sinh (Có thể chỉnh sửa tay):</label>
-                <textarea id="sop-input" placeholder="Bản SOP được chốt từ Trợ Lý AI sẽ hiển thị ở đây..." disabled></textarea>
+                <label for="sop-input">Dữ liệu thô tinh lọc biên dịch (Có thể tự overwrite/gõ tay vào đây nhanh):</label>
+                <textarea id="sop-input" placeholder="Bản Gạch đầu dòng tinh gọn cuối cùng từ AI sẽ xuất hiện tại đây..." disabled></textarea>
             </div>
             
             <button id="generate-btn" class="btn magic full-width" disabled>
-                <span class="btn-text">Chuyển đổi sang Draw.io</span>
+                <span class="btn-text">🚀 Đẩy bản vẽ kỹ thuật lên Draw.io</span>
                 <span class="loader hidden" id="gen-loader"></span>
             </button>
             
