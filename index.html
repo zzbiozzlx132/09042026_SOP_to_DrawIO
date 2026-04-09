@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOP to Draw.io Converter</title>
+    <title>SOP to Draw.io (A-Z Assistant)</title>
     <meta name="description" content="Generate draw.io architectural diagrams instantly from a text SOP using Gemini API">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +13,12 @@
 <body>
     <div class="glass-container">
         <header>
-            <div class="badge">AI-Powered</div>
+            <div class="badge">AI-Powered Consultant</div>
             <h1>SOP to <span class="highlight">Draw.io</span></h1>
-            <p>Biến mọi quy trình SOP thành sơ đồ Draw.io chuyên nghiệp chỉ trong tích tắc.</p>
+            <p>Trợ lý ảo phân tích, chuẩn hóa và tự thiết kế lưu đồ tự động từ ý tưởng của bạn.</p>
         </header>
 
+        <!-- 1. Settings Section -->
         <section id="settings-section" class="card">
             <div class="card-header">
                 <h2>Cấu hình kết nối Gemini</h2>
@@ -30,9 +31,10 @@
             <p id="connection-status" class="status-msg"></p>
         </section>
 
-        <section id="generator-section" class="card disabled-section">
+        <!-- 2. Chat Brainstorming Section -->
+        <section id="chat-section" class="card disabled-section">
             <div class="card-header">
-                <h2>Cấu hình Sơ Đồ</h2>
+                <h2>Trợ lý SOP (Tư duy A-Z)</h2>
                 <div class="model-group">
                     <label for="model-select">Model:</label>
                     <select id="model-select" disabled>
@@ -41,18 +43,44 @@
                 </div>
             </div>
             
+            <div class="chat-container" id="chat-window">
+                <!-- Welcome Message -->
+                <div class="chat-message ai-message">
+                    <div class="avatar">AI</div>
+                    <div class="message-content">
+                        Chào bạn! Tôi là Cố vấn Quy trình SOP. Hãy cho tôi biết sơ qua bạn muốn xây dựng mô hình quy trình nào (ví dụ: Tuyển dụng, Mua hàng, Xử lý khiếu nại...), tôi sẽ phân tích từng bước, bóc tách rẽ nhánh ngoại lệ giúp bạn.
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <textarea id="chat-input" placeholder="Ví dụ: Mình muốn quy trình duyệt nghỉ ngơi của công ty..." rows="2" disabled></textarea>
+                <div class="chat-actions">
+                    <button class="btn send-btn" id="send-chat-btn" disabled>Gửi</button>
+                    <button class="btn primary outline" id="finalize-btn" disabled>Chốt SOP & Vẽ Sơ Đồ 👇</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Generator Output Section -->
+        <section id="generator-section" class="card disabled-section">
+            <div class="card-header">
+                <h2>Cấu trúc Lưu Đồ (XML Converter)</h2>
+            </div>
+            
             <div class="input-container">
-                <label for="sop-input">Mô tả quy trình (SOP):</label>
-                <textarea id="sop-input" placeholder="Ví dụ: Bước 1: Khách hàng đặt hàng qua Website. Bước 2: Hệ thống ghi nhận. Bước 3: Nhân viên xác nhận..." disabled></textarea>
+                <label for="sop-input">Dữ liệu SOP chuẩn mực dùng để sinh (Có thể chỉnh sửa tay):</label>
+                <textarea id="sop-input" placeholder="Bản SOP được chốt từ Trợ Lý AI sẽ hiển thị ở đây..." disabled></textarea>
             </div>
             
             <button id="generate-btn" class="btn magic full-width" disabled>
                 <span class="btn-text">Chuyển đổi sang Draw.io</span>
-                <span class="loader hidden"></span>
+                <span class="loader hidden" id="gen-loader"></span>
             </button>
             
             <p id="generate-status" class="status-msg"></p>
         </section>
+
     </div>
 
     <!-- Pako library for Deflate Compression -->
