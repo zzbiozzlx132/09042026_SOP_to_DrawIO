@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP to Draw.io Converter</title>
+    <meta name="description" content="Generate draw.io architectural diagrams instantly from a text SOP using Gemini API">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-container">
+        <header>
+            <div class="badge">AI-Powered</div>
+            <h1>SOP to <span class="highlight">Draw.io</span></h1>
+            <p>Biến mọi quy trình SOP thành sơ đồ Draw.io chuyên nghiệp chỉ trong tích tắc.</p>
+        </header>
+
+        <section id="settings-section" class="card">
+            <div class="card-header">
+                <h2>Cấu hình kết nối Gemini</h2>
+                <div class="status-indicator" id="status-dot"></div>
+            </div>
+            <div class="input-group">
+                <input type="password" id="api-key" placeholder="Nhập Gemini API Key của bạn..." autocomplete="off">
+                <button id="connect-btn" class="btn primary">Kết Nối</button>
+            </div>
+            <p id="connection-status" class="status-msg"></p>
+        </section>
+
+        <section id="generator-section" class="card disabled-section">
+            <div class="card-header">
+                <h2>Cấu hình Sơ Đồ</h2>
+                <div class="model-group">
+                    <label for="model-select">Model:</label>
+                    <select id="model-select" disabled>
+                        <option value="">Chưa kết nối</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <label for="sop-input">Mô tả quy trình (SOP):</label>
+                <textarea id="sop-input" placeholder="Ví dụ: Bước 1: Khách hàng đặt hàng qua Website. Bước 2: Hệ thống ghi nhận. Bước 3: Nhân viên xác nhận..." disabled></textarea>
+            </div>
+            
+            <button id="generate-btn" class="btn magic full-width" disabled>
+                <span class="btn-text">Chuyển đổi sang Draw.io</span>
+                <span class="loader hidden"></span>
+            </button>
+            
+            <p id="generate-status" class="status-msg"></p>
+        </section>
+    </div>
+
+    <!-- Pako library for Deflate Compression -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
